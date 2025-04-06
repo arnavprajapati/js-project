@@ -1,7 +1,14 @@
+import { homeQuantityToggle } from "./homeQuantityToggle";
+
 const productContainer = document.querySelector('#productContainer')
 const productTemplate = document.querySelector('#productTemplate')
 
 export const showProductsCard = (products) => {
+
+    if(!products){
+        return false;
+    }
+
     products.forEach((crudProd) => {
         const { brand, category, description, id, image, name, price, stock } = crudProd 
         const prodClone = document.importNode(productTemplate.content, true)
@@ -17,7 +24,13 @@ export const showProductsCard = (products) => {
         prodClone.querySelector(".productActualPrice").textContent = `₹${
         price * 4
         }`;
-        productContainer.append(prodClone)
 
+        prodClone.querySelector('.stockElement')
+            .addEventListener('click',(event) => {
+            homeQuantityToggle(event, id, stock)
+        })
+
+
+        productContainer.append(prodClone)
     })
 } 
