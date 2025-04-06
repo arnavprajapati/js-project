@@ -11,10 +11,9 @@ export const addToCart = (event, id, sotck) => {
     let quantity = currProdElem.querySelector('.productQuantity').innerText
 
     price = price.replace("₹","")
+    price = Number(quantity * price)
+    console.log(quantity, price)
 
-    // console.log(price)
-    // console.log(quantity)
-
-    
-
+    arrLocalStorageProduct.push({id, price,quantity})
+    localStorage.setItem('cartProductLS',JSON.stringify(arrLocalStorageProduct))
 }
